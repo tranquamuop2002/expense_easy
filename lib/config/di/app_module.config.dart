@@ -10,8 +10,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:native_shared_preferences/native_shared_preferences.dart'
-    as _i5;
 
 import '../../common/services/common_services.dart' as _i4;
 import '../../presentation/views/notebook_view/notebook_controller.dart' as _i3;
@@ -32,10 +30,6 @@ Future<_i1.GetIt> $initGetIt(
   final appModule = _$AppModule();
   gh.factory<_i3.NoteBookController>(() => _i3.NoteBookController());
   gh.singleton<_i4.CommonServices>(() => _i4.CommonServices());
-  await gh.singletonAsync<_i5.NativeSharedPreferences>(
-    () => appModule.sharedPreferences,
-    preResolve: true,
-  );
   gh.singleton<_i6.Gaps>(() => _i6.Gaps());
   return getIt;
 }

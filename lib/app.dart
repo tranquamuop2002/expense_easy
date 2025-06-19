@@ -43,6 +43,9 @@ class App extends StatelessWidget {
 
 Future<void> configureApp() async {
 
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+
   // Init di
   await configureDependencies();
 
