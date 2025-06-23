@@ -40,21 +40,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # https://pub.dev/packages/build_runner
-  build_runner:
-
-  # https://pub.dev/packages/flutter_bloc/
-  flutter_bloc: 8.1.6
-
   # https://pub.dev/packages/logger
   logger: 2.5.0
 
   # Support manager routers for Flutter.
   # https://pub.dev/packages/fluro
   fluro: 2.0.5
-
-  # https://pub.dev/packages/flutter_native_splash
-  flutter_native_splash: ^2.2.19
 
   # Support multi languages
   # https://pub.dev/packages/intl
@@ -67,14 +58,14 @@ dependencies:
   injectable: ^2.3.2
 
   # https://pub.dev/packages/connectivity_plus
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^6.1.4
 
   # https://pub.dev/packages/equatable
   equatable: ^2.0.5
 
   # DI
   # https://pub.dev/packages/get_it
-  get_it: ^7.6.4
+  get_it: ^8.0.3
 
   # https://pub.dev/packages/flutter_svg
   flutter_svg: ^2.0.9
@@ -85,15 +76,15 @@ dependencies:
   http: ^1.1.2
 
   # https://pub.dev/packages/package_info_plus
-  package_info_plus: 4.0.2
+  package_info_plus: ^8.3.0
 
   # https://pub.dev/packages/retrofit
-  retrofit: ">=4.0.0 <5.0.0"
+  retrofit: ^4.4.2
 
   # Support generate for retrofit
   # https://pub.dev/packages/json_serializable
-  retrofit_generator: ^8.1.2
-  json_serializable: ^6.7.1
+  retrofit_generator: ^9.2.0
+  json_serializable: ^6.9.0
 
   # https://pub.dev/packages/json_annotation
   json_annotation: ^4.8.1
@@ -105,19 +96,16 @@ dependencies:
   either_dart: ^1.0.0
 
   # https://pub.dev/packages/math_expressions
-  math_expressions: 2.4.0
-
-  native_shared_preferences:
-    path: ./extensions/native_shared_preferences
+  math_expressions: 3.0.0
 
   # https://pub.dev/packages/floor
   floor: ^1.5.0
 
-  # https://pub.dev/packages/sqflite
-  sqflite: ^2.3.2
-
   # https://pub.dev/packages/get
   get: ^4.7.2
+
+  # https://pub.dev/packages/flutter_native_splash
+  flutter_native_splash: ^2.4.6
 
 
 
@@ -130,7 +118,10 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
+  floor_generator: ^1.5.0
+  # https://pub.dev/packages/build_runner
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -142,6 +133,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

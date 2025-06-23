@@ -93,8 +93,7 @@ class _MainViewState extends State<MainView> with BaseMixin {
 
   Widget _buildBottomBar() {
     return SafeArea(
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+      child: SizedBox(
         height: DimensRes.sp60,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -109,6 +108,7 @@ class _MainViewState extends State<MainView> with BaseMixin {
                 ],
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildBottomBarItem(
                     navItem: BottomNavItem.home,
