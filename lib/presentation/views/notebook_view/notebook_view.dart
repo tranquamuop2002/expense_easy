@@ -58,7 +58,7 @@ class _NotebookViewState extends State<NotebookView>
                   children: List.generate(
                     4,
                     (index) => _buildItem(
-                      icon: Assets.noteBookIcon,
+                      icon: Assets.iconNoteBook,
                       label: "Notebook",
                     ),
                   ),
@@ -80,7 +80,6 @@ class _NotebookViewState extends State<NotebookView>
             ? ScreenHelper().setOffSetInScreen(
                 size: _noteBookController.offsetEventDetail.value.dy -
                     ScreenUtil().statusBarHeight,
-                isDx: false,
                 context: context)
             : null,
         bottom: _noteBookController.isDragPreviewButton.isTrue
@@ -125,7 +124,7 @@ class _NotebookViewState extends State<NotebookView>
           padding: const EdgeInsets.all(DimensRes.sp15),
           foregroundColor: ColorsRes.primary),
       child: Image.asset(
-        Assets.pencilIcon,
+        Assets.iconPencil,
         width: DimensRes.sp36,
         height: DimensRes.sp36,
       ),

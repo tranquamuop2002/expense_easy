@@ -25,25 +25,15 @@ class ScreenHelper {
 
   double setOffSetInScreen({
     required double size,
-    required bool isDx,
     required BuildContext context,
   }) {
-    if (isDx) {
-      final screenWidth = ScreenUtil().screenWidth;
-
-      final middle = screenWidth / 2;
-      final snapped =
-          size < middle ? DimensRes.sp20 : screenWidth - DimensRes.sp80;
-
-      return max(min(snapped, screenWidth), 0);
-    } else {
-      final bottomLimit = ScreenUtil().screenHeight -
+    final bottomLimit = ScreenUtil().screenHeight -
           ScreenUtil().bottomBarHeight -
           ScreenUtil().statusBarHeight -
-          140.h;
+          110.h;
 
       return max(min(size, bottomLimit), 0);
-    }
+
   }
 
   static const double _defaultLagerWidth = 500.0;

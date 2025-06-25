@@ -112,22 +112,22 @@ class _MainViewState extends State<MainView> with BaseMixin {
                 children: [
                   _buildBottomBarItem(
                     navItem: BottomNavItem.home,
-                    icon: Assets.noteBookIcon,
+                    icon: Assets.iconNoteBook,
                     label: S.current.notebook,
                   ),
                   _buildBottomBarItem(
                     navItem: BottomNavItem.wallet,
-                    icon: Assets.walletIcon,
+                    icon: Assets.iconWallet,
                     label: S.current.wallet,
                   ),
                   _buildBottomBarItem(
                     navItem: BottomNavItem.analytics,
-                    icon: Assets.analyticsIcon,
+                    icon: Assets.iconAnalytics,
                     label: S.current.analytics,
                   ),
                   _buildBottomBarItem(
                     navItem: BottomNavItem.more,
-                    icon: Assets.moreIcon,
+                    icon: Assets.iconMore,
                     label: S.current.more,
                   ),
                 ],
