@@ -103,7 +103,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
                               Assets.iconPlusMinus,
                             ),
                             buildButtonIcon(
-                              "percent",
+                              "%",
                               Assets.iconPercent,
                             ),
                             buildButtonIcon(
@@ -199,9 +199,10 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
         }
       } else if (buttonText == "=") {
         try {
+          final preparedExpression = preparePercentExpression(expression);
           Parser p = Parser();
           Expression exp = p.parse(
-            expression.replaceAll("×", "*").replaceAll(",", ""),
+            preparedExpression.replaceAll("×", "*").replaceAll(",", ""),
           );
           ContextModel cm = ContextModel();
           double eval = exp.evaluate(EvaluationType.REAL, cm);
@@ -219,6 +220,10 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
         if (!isCurrentNumberDecimal) {
           expression += buttonText;
         }
+      } else if (buttonText == "%") {
+        if (!isCurrentNumberDecimal) {
+          expression += buttonText;
+        }
       } else {
         if ((!isCurrentNumberDecimal && lastNumber.length < 8) ||
             (isCurrentNumberDecimal && decimalDigits < 2)) {
@@ -232,20 +237,23 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
 
   String formatExpression(String exp) {
     List<String> parts = exp.split(RegExp(r'([+\-×/])'));
+
     for (int i = 0; i < parts.length; i++) {
-      if (!RegExp(r'[+\-×/]').hasMatch(parts[i]) &&
-          parts[i].isNotEmpty &&
-          !parts[i].contains('(') &&
-          !parts[i].contains(')')) {
-        if (!parts[i].contains(".")) {
-          parts[i] = NumberFormat("#,###").format(
-            int.parse(parts[i].replaceAll(",", "")),
-          );
-        }
+      final part = parts[i];
+
+      if (part.isEmpty || part.contains('(') || part.contains(')') || part.contains('%')) {
+        continue;
+      }
+
+      final cleaned = part.replaceAll(',', '');
+      if (RegExp(r'^-?\d+$').hasMatch(cleaned)) {
+        parts[i] = NumberFormat("#,###").format(int.parse(cleaned));
       }
     }
+
     return rebuildExpression(exp, parts);
   }
+
 
 
   String rebuildExpression(String originalExp, List<String> formattedParts) {
@@ -262,6 +270,36 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
     }
     return result;
   }
+
+  String preparePercentExpression(String exp) {
+    exp = exp.replaceAll(",", ""); // bỏ dấu phẩy
+
+    final regex = RegExp(r'(\d+(\.\d+)?)(%)');
+    return exp.replaceAllMapped(regex, (match) {
+      final value = double.parse(match.group(1)!);
+
+      // Tìm xem có toán tử + hoặc - ngay trước đó không
+      int opIndex = match.start - 1;
+      while (opIndex >= 0 && exp[opIndex] == ' ') {
+        opIndex--;
+      }
+
+      if (opIndex >= 0 && (exp[opIndex] == '+' || exp[opIndex] == '-')) {
+        // Tìm số đứng trước toán tử để áp dụng %
+        final beforeOp = exp.substring(0, opIndex);
+        final numberMatch = RegExp(r'(\d+(\.\d+)?)$').firstMatch(beforeOp);
+        if (numberMatch != null) {
+          final base = double.parse(numberMatch.group(1)!);
+          final percentValue = base * value / 100;
+          return percentValue.toString();
+        }
+      }
+
+      // Mặc định: chỉ chia cho 100
+      return (value / 100).toString();
+    });
+  }
+
 
   Widget buildButtonText(String text, {Color color = ColorsRes.white}) {
     return Expanded(
